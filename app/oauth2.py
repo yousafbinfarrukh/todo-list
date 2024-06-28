@@ -18,12 +18,9 @@ def get_current_user(token_str: str = Depends(oauth2_scheme), db: Session = Depe
         if email is None:
             raise credentials_exception
         token_data = schemas.TokenData(email=email)
-        print(f"Token data: {token_data}")
     except JWTError as e:
-        print(f"JWTError: {e}")
         raise credentials_exception
     user = db.query(models.User).filter(models.User.email == token_data.email).first()
     if user is None:
         raise credentials_exception
-    print(f"Authenticated user: {user}")
     return user

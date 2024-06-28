@@ -1,12 +1,12 @@
 FROM python:3.9
 
-WORKDIR /app
+WORKDIR /todo-list
 
 COPY requirements.txt /app/requirements.txt
 
 RUN pip install --no-cache-dir -r /app/requirements.txt
 
-COPY ./app /app
+COPY ./ /todo-list
 
 EXPOSE 8000
 
