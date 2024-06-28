@@ -22,3 +22,12 @@ class TodoItem(TodoItemBase):
 
     class config:
         orm_mode = True
+
+class UserBase (BaseModel):
+    name: str
+    email: str
+    password: str
+
+class User (BaseModel):
+    name: str
+    email: str
