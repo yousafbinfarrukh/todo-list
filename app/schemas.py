@@ -12,10 +12,13 @@ class TodoItemCreate (TodoItemBase):
 class TodoItemUpdate (BaseModel):
     title: Optional[str] = None
     description: Optional[str] = None
-    completed: Optional[str] = None
+    completed: Optional[bool] = False
 
 class TodoItem(TodoItemBase):
     id: int
     completed: bool
     created_at: datetime
     updated_at: datetime
+
+    class config:
+        orm_mode = True
