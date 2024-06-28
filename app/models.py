@@ -1,4 +1,4 @@
-from sqlalchemy import Boolean, Column, Integer, String, DateTime
+from sqlalchemy import Boolean, Column, Integer, String, DateTime, ForeignKey
 from sqlalchemy.orm import relationship
 from datetime import datetime
 from .database import Base
@@ -10,7 +10,7 @@ class User(Base):
     name = Column(String)
     email = Column(String)
     password = Column(String)
-
+    todos = relationship("TodoItem", back_populates="owner")
 
 class TodoItem(Base):
     __tablename__ = 'todo_items'
@@ -21,4 +21,6 @@ class TodoItem(Base):
     completed = Column(Boolean, default=False)
     created_at = Column(DateTime, default=datetime.utcnow)
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    owner_id = Column(Integer, ForeignKey('user.id'))
+    owner = relationship("User", back_populates="todos")
 
